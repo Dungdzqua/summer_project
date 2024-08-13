@@ -1,0 +1,24 @@
+{Cau1:{
+    Question:{
+        A:[bla,True],
+        B:[bla,False],
+        C:[bla,False],
+        D:[bla,False]}},
+Cau2:{
+    Question:{
+        A:[bla,True],
+        B:[bla,False],
+        C:[bla,False],
+        D:[bla,False]}}
+        }
+
+
+
+app = QApplication(sys.argv)
+    mainWindow= QMainWindow()
+    mainWindow.setWindowTitle("hell")
+    mainWindow.setGeometry(50,80,1330,800)
+    color = QColor(255,255,255) 
+    mainWindow.setStyleSheet("background-color:color ;")
+    label=QLabel(mainWindow)
+    label.setText("ha")

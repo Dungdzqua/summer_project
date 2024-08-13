@@ -1,0 +1,13 @@
+I.GUI
+    1.Thư Viện
+        - pyqt5
+    2. học cái dùng lib
+II. Các bài toán
+    1. cách chuyển giữa các frame
+    2. timer(hết thời gian tự nộp)
+    3. làm nút chuyển các câu hỏi
+    4. cách nhớ các câu đã chọn (khi chưa nộp)
+    5. nếu chọn đáp án khác (xóa ans cũ chuyển ans mới)
+    6. xử lí các đáp án đã chọn (if else)
+    7. print các stats
+    8. cách sử dụng pandas cách để đọc file csv

@@ -1,0 +1,13 @@
+prefix=/Users/dung/Downloads/project/summer_project/gaygovl
+exec_prefix=/Users/dung/Downloads/project/summer_project/gaygovl
+libdir=/Users/dung/Downloads/project/summer_project/gaygovl/lib
+sharedlibdir=/Users/dung/Downloads/project/summer_project/gaygovl/lib
+includedir=/Users/dung/Downloads/project/summer_project/gaygovl/include
+
+Name: zlib
+Description: zlib compression library
+Version: 1.2.13
+
+Requires:
+Libs: -L${libdir} -L${sharedlibdir} -lz
+Cflags: -I${includedir}
