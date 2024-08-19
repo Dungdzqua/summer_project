@@ -69,6 +69,7 @@ class MathGUI(UIN):
         self.chinhstrC='neige'
         self.chinhstrD='neige'
 
+        self.questionInd=None
 
         self.cAButton = QPushButton(f'{self.chinhstrA}',frameMain)
         self.cAButton.setGeometry(50,400,400,170)
@@ -116,22 +117,27 @@ class MathGUI(UIN):
         self.cBButton.setStyleSheet(style.ChoiceButton)
         self.cCButton.setStyleSheet(style.ChoiceButton)
         self.cDButton.setStyleSheet(style.ChoiceButton)
+        print(f'a:{self.questionInd}')
 
     def selcB(self):
         self.cAButton.setStyleSheet(style.ChoiceButton)
         self.cBButton.setStyleSheet(style.ChoiceButtonEffect)
         self.cCButton.setStyleSheet(style.ChoiceButton)
         self.cDButton.setStyleSheet(style.ChoiceButton)
+        print(f'b:{self.questionInd}')
     def selcC(self):
         self.cAButton.setStyleSheet(style.ChoiceButton)
         self.cBButton.setStyleSheet(style.ChoiceButton)
         self.cCButton.setStyleSheet(style.ChoiceButtonEffect)
         self.cDButton.setStyleSheet(style.ChoiceButton)
+        print(f'c:{self.questionInd}')
+
     def selcD(self):
         self.cAButton.setStyleSheet(style.ChoiceButton)
         self.cBButton.setStyleSheet(style.ChoiceButton)
         self.cCButton.setStyleSheet(style.ChoiceButton)
         self.cDButton.setStyleSheet(style.ChoiceButtonEffect)
+        print(f'd:{self.questionInd}')
 
 
     def showChoice(self,ind):
@@ -153,7 +159,7 @@ class MathGUI(UIN):
         self.cBButton.setStyleSheet(style.ChoiceButton)
         self.cCButton.setStyleSheet(style.ChoiceButton)
         self.cDButton.setStyleSheet(style.ChoiceButton)
-
+        self.questionInd=ind
 
         # print('index is'+str(ind))
         # print(self.choi[ind])
