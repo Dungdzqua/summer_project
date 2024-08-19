@@ -59,6 +59,7 @@ class MathGUI(UIN):
         self.scroll_area.setWidgetResizable(True)
         self.scroll_area.show()
 
+
         self._questiontxt=QLabel(frameMain)
         self._questiontxt.setText('chon cau hoi')
         self._questiontxt.setGeometry(70,65,750,200)
@@ -70,6 +71,7 @@ class MathGUI(UIN):
         self.chinhstrD='neige'
 
         self.questionInd=None
+        self.currChoice=None
 
         self.cAButton = QPushButton(f'{self.chinhstrA}',frameMain)
         self.cAButton.setGeometry(50,400,400,170)
@@ -90,7 +92,7 @@ class MathGUI(UIN):
         self.cDButton.setGeometry(600,620,400,170)
         self.cDButton.setStyleSheet(style.ChoiceButton)
         self.cDButton.clicked.connect(self.selcD)
-
+        #create question index
         for txt in range(0,len(csv.csvList)):
             self.i=f'{txt+1}'
             self._button = QPushButton(self.i,self.scroll_area)
@@ -98,7 +100,11 @@ class MathGUI(UIN):
             self._button.setStyleSheet(style.listStyle)
             self._button.show()
             self._button.clicked.connect(lambda ch, idx=txt: self.showChoice(idx))
-
+        #create user answer list
+        self.userans=[]
+        for x in range(0,len(csv.csvList)):
+            self.userans.append(None)
+        
         #finish button
         self._finishButton = QPushButton("FINISH",frameCot)
         self._finishButton.setGeometry(20,280,350,120)
@@ -117,26 +123,33 @@ class MathGUI(UIN):
         self.cBButton.setStyleSheet(style.ChoiceButton)
         self.cCButton.setStyleSheet(style.ChoiceButton)
         self.cDButton.setStyleSheet(style.ChoiceButton)
+        self.userans[self.questionInd]='A'
         print(f'a:{self.questionInd}')
+
 
     def selcB(self):
         self.cAButton.setStyleSheet(style.ChoiceButton)
         self.cBButton.setStyleSheet(style.ChoiceButtonEffect)
         self.cCButton.setStyleSheet(style.ChoiceButton)
         self.cDButton.setStyleSheet(style.ChoiceButton)
+        self.userans[self.questionInd]='B'
         print(f'b:{self.questionInd}')
+
     def selcC(self):
         self.cAButton.setStyleSheet(style.ChoiceButton)
         self.cBButton.setStyleSheet(style.ChoiceButton)
         self.cCButton.setStyleSheet(style.ChoiceButtonEffect)
         self.cDButton.setStyleSheet(style.ChoiceButton)
+        self.userans[self.questionInd]='C'
         print(f'c:{self.questionInd}')
+
 
     def selcD(self):
         self.cAButton.setStyleSheet(style.ChoiceButton)
         self.cBButton.setStyleSheet(style.ChoiceButton)
         self.cCButton.setStyleSheet(style.ChoiceButton)
         self.cDButton.setStyleSheet(style.ChoiceButtonEffect)
+        self.userans[self.questionInd]='D'
         print(f'd:{self.questionInd}')
 
 
@@ -144,6 +157,7 @@ class MathGUI(UIN):
         choi=csv.csvList
         self._questiontxt.setText(str(choi[ind][0]))
 
+        self.questionInd=ind
 
         textButtonA=str(choi[ind][1])
         textButtonB=str(choi[ind][2])
@@ -159,8 +173,7 @@ class MathGUI(UIN):
         self.cBButton.setStyleSheet(style.ChoiceButton)
         self.cCButton.setStyleSheet(style.ChoiceButton)
         self.cDButton.setStyleSheet(style.ChoiceButton)
-        self.questionInd=ind
-
+        print(self.userans)
         # print('index is'+str(ind))
         # print(self.choi[ind])
         # print(f"A:{self.chinhstrA}")
