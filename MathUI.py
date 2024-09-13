@@ -3,6 +3,7 @@ from PyQt5.QtWidgets import QApplication , QPushButton, QMainWindow, QLabel , QF
 from PyQt5.QtCore import Qt , QTimer
 from datetime import datetime
 from time import sleep
+from finalscreen import ScoreGUI
 import readcsv as csv 
 import style
 
@@ -15,13 +16,13 @@ class MathGUI(UIN):
 
         #frame1
         frameCot = QFrame()
-        frameCot.setGeometry(0,0,150,100)
+        frameCot.setGeometry(0,0,245,100)
         frameCot.setStyleSheet("background-color:rgb(175,200,173)")
         spillter.addWidget(frameCot)
 
         #frame chinh
         frameMain = QFrame()
-        frameMain.setStyleSheet("background-color:rgb(136,171,142)")
+        frameMain.setStyleSheet("background-color:rgb(136, 171, 142)")
         spillter.addWidget(frameMain)
 
         Cbox = QVBoxLayout()
@@ -31,9 +32,6 @@ class MathGUI(UIN):
         widget = QWidget()
         widget.setLayout(Cbox)
         self.setCentralWidget(widget)
-        #finish
-        # self._finishbutton=QPushButton("Finish",frameMain)
-        # self._finishbutton.clicked.connect(finishbutton,self)
 
         #timer
         self._startButton=QPushButton("START",frameCot)
@@ -41,7 +39,7 @@ class MathGUI(UIN):
         self._startButton.clicked.connect(self.countdown)
         self._startButton.setStyleSheet(style.startBuuonnn)
         self.time = 10
-
+    
         self.timerprint=QLabel(frameCot)
         self.timerprint.setGeometry(80,20,240,100)
         self.timerprint.setText(datetime.fromtimestamp(self.time).strftime("%M:%S"))
@@ -57,6 +55,7 @@ class MathGUI(UIN):
         self.scroll_area.setGeometry(0,420,400,430)
         self.scroll_area.setWidget(self.scroll_widget)
         self.scroll_area.setWidgetResizable(True)
+        self.scroll_area.setStyleSheet("QScrollArea { border: none; }")
         self.scroll_area.show()
 
 
@@ -104,51 +103,59 @@ class MathGUI(UIN):
         self.userans=[]
         for x in range(0,len(csv.csvList)):
             self.userans.append(None)
-        
+        print(self.userans)
         #finish button
         self._finishButton = QPushButton("FINISH",frameCot)
         self._finishButton.setGeometry(20,280,350,120)
         self._finishButton.setStyleSheet(style.finishButton)
+        self._finishButton.clicked.connect(self.finishbutton)
 
 
 
-    # def finishbutton(self):
-    #     self.nextUI=MainUI()
-    #     self.nextUI.show()
-    #     self.hide()
+    def finishbutton(self):
+        self.nextUI=ScoreGUI()
+        self.nextUI.show()
+        self.hide()
 
 
-    def selcA(self):
+    
+    def EffectA(self):
         self.cAButton.setStyleSheet(style.ChoiceButtonEffect)
         self.cBButton.setStyleSheet(style.ChoiceButton)
         self.cCButton.setStyleSheet(style.ChoiceButton)
         self.cDButton.setStyleSheet(style.ChoiceButton)
+    def selcA(self):
+        self.EffectA()
         self.userans[self.questionInd]='A'
         print(f'a:{self.questionInd}')
 
-
-    def selcB(self):
+    def EffectB(self):
         self.cAButton.setStyleSheet(style.ChoiceButton)
         self.cBButton.setStyleSheet(style.ChoiceButtonEffect)
         self.cCButton.setStyleSheet(style.ChoiceButton)
         self.cDButton.setStyleSheet(style.ChoiceButton)
+    def selcB(self):
+        self.EffectB()
         self.userans[self.questionInd]='B'
         print(f'b:{self.questionInd}')
 
-    def selcC(self):
+    def EffectC(self):
         self.cAButton.setStyleSheet(style.ChoiceButton)
         self.cBButton.setStyleSheet(style.ChoiceButton)
         self.cCButton.setStyleSheet(style.ChoiceButtonEffect)
         self.cDButton.setStyleSheet(style.ChoiceButton)
         self.userans[self.questionInd]='C'
+    def selcC(self):
+        self.EffectC()
         print(f'c:{self.questionInd}')
 
-
-    def selcD(self):
+    def EffectD(self):
         self.cAButton.setStyleSheet(style.ChoiceButton)
         self.cBButton.setStyleSheet(style.ChoiceButton)
         self.cCButton.setStyleSheet(style.ChoiceButton)
         self.cDButton.setStyleSheet(style.ChoiceButtonEffect)
+    def selcD(self):
+        self.EffectD()
         self.userans[self.questionInd]='D'
         print(f'd:{self.questionInd}')
 
@@ -173,14 +180,15 @@ class MathGUI(UIN):
         self.cBButton.setStyleSheet(style.ChoiceButton)
         self.cCButton.setStyleSheet(style.ChoiceButton)
         self.cDButton.setStyleSheet(style.ChoiceButton)
-        print(self.userans)
-        # print('index is'+str(ind))
-        # print(self.choi[ind])
-        # print(f"A:{self.chinhstrA}")
-        # print(f"B:{self.chinhstrB}")
-        # print(f"C:{self.chinhstrC}")
-        # print(f"D:{self.chinhstrD}")
 
+        if self.userans[self.questionInd]=='A':
+            self.EffectA()
+        elif self.userans[self.questionInd]=='B':
+            self.EffectB()
+        elif self.userans[self.questionInd]=='C':
+            self.EffectC()
+        elif self.userans[self.questionInd]=='D':
+            self.EffectD()
     def countdown(self): 
         self.timer= QTimer()
         self.timer.timeout.connect(self.updateTime)

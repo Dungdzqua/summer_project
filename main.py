@@ -10,6 +10,7 @@ import time
 #import UI
 from mainui import MainUI
 from MathUI import MathGUI
+# from finalscreen import ScoreGUI
 app= QApplication([])
 
 GUI=MainUI()
