@@ -99,3 +99,18 @@ ChoiceButtonEffect="""
 
             }
         """
+FinalScreenTxt=""" 
+            QLabel {
+            font-size:100px;
+            font-family:SF Pro Display;
+            color:rgb(0, 0, 0);
+            }
+        """
+answerCheckTxt=""" 
+            QLabel {
+            font-size:45px;
+            font-family:SF Pro Display;
+            color:rgb(0, 0, 0);
+            background-color: rgba(255, 255, 255, 0);
+            }
+        """

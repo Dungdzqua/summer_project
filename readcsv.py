@@ -6,3 +6,7 @@ df=pd.DataFrame(mycsv)
 shuffled_df = df.sample(n=len(df))
 shuffled_df = shuffled_df.reset_index(drop=True)
 csvList=shuffled_df.values
+ListAnswer=[]
+for x in range(0,10):
+    ListAnswer.append(csvList[x][-1])
+

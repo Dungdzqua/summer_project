@@ -6,7 +6,6 @@ from time import sleep
 from finalscreen import ScoreGUI
 import readcsv as csv 
 import style
-
 class MathGUI(UIN):
     def __init__(self):
         
@@ -38,7 +37,8 @@ class MathGUI(UIN):
         self._startButton.setGeometry(20,150,350,120)
         self._startButton.clicked.connect(self.countdown)
         self._startButton.setStyleSheet(style.startBuuonnn)
-        self.time = 10
+        self.time = 300
+        self.timerc=False
     
         self.timerprint=QLabel(frameCot)
         self.timerprint.setGeometry(80,20,240,100)
@@ -56,6 +56,7 @@ class MathGUI(UIN):
         self.scroll_area.setWidget(self.scroll_widget)
         self.scroll_area.setWidgetResizable(True)
         self.scroll_area.setStyleSheet("QScrollArea { border: none; }")
+        self.scroll_area.setEnabled(False)
         self.scroll_area.show()
 
 
@@ -110,15 +111,6 @@ class MathGUI(UIN):
         self._finishButton.setStyleSheet(style.finishButton)
         self._finishButton.clicked.connect(self.finishbutton)
 
-
-
-    def finishbutton(self):
-        self.nextUI=ScoreGUI()
-        self.nextUI.show()
-        self.hide()
-
-
-    
     def EffectA(self):
         self.cAButton.setStyleSheet(style.ChoiceButtonEffect)
         self.cBButton.setStyleSheet(style.ChoiceButton)
@@ -127,6 +119,7 @@ class MathGUI(UIN):
     def selcA(self):
         self.EffectA()
         self.userans[self.questionInd]='A'
+        print(f'ind: {self.questionInd}')
         print(f'a:{self.questionInd}')
 
     def EffectB(self):
@@ -137,6 +130,7 @@ class MathGUI(UIN):
     def selcB(self):
         self.EffectB()
         self.userans[self.questionInd]='B'
+        print(f'ind: {self.questionInd}')
         print(f'b:{self.questionInd}')
 
     def EffectC(self):
@@ -144,10 +138,12 @@ class MathGUI(UIN):
         self.cBButton.setStyleSheet(style.ChoiceButton)
         self.cCButton.setStyleSheet(style.ChoiceButtonEffect)
         self.cDButton.setStyleSheet(style.ChoiceButton)
-        self.userans[self.questionInd]='C'
+
     def selcC(self):
         self.EffectC()
         print(f'c:{self.questionInd}')
+        self.userans[self.questionInd]='C'
+        print(f'ind: {self.questionInd}')
 
     def EffectD(self):
         self.cAButton.setStyleSheet(style.ChoiceButton)
@@ -157,6 +153,7 @@ class MathGUI(UIN):
     def selcD(self):
         self.EffectD()
         self.userans[self.questionInd]='D'
+        print(f'ind: {self.questionInd}')
         print(f'd:{self.questionInd}')
 
 
@@ -194,14 +191,28 @@ class MathGUI(UIN):
         self.timer.timeout.connect(self.updateTime)
         self.timer.start(1000)
         self._startButton.setStyleSheet(style.startButtonAc)
+        self._startButton.setEnabled(False)
+        self.scroll_area.setEnabled(True)
+
     
     def updateTime(self):
         if self.time > 0 :
+            self.timerc=True
             self.time -=1
             self.currTime = datetime.fromtimestamp(self.time).strftime("%M:%S")
             self.timerprint.setText(f'{self.currTime}')
         else:
             self.timer.stop()
+            self.finishbutton()
+    def finishbutton(self):
+        sendTime=self.time
+        print(sendTime)
+        print(self.userans)
+        if self.timerc:
+            self.timer.stop()
+        self.nextUI=ScoreGUI(sendTime,self.userans)
+        self.nextUI.show()
+        self.hide()
             
   
   
